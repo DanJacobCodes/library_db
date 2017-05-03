@@ -22,7 +22,24 @@ get('/books') do
 end
 
 get('/books/:id/edit') do
+@book = Book.find(params.fetch("id").to_i())
 erb(:books_edit_form)
+end
+
+patch('/books/:id')do
+  title = params.fetch('title')
+  author = params.fetch('author')
+  @book = Book.find(params.fetch('id').to_i())
+  @book.update({:title=>title, :author=>author})
+  @books = Book.all()
+  erb(:books)
+end
+
+delete('/books/:id') do
+  @book = Book.find(params.fetch('id').to_i())
+  @book.delete()
+  @books = Book.all()
+  erb(:books)
 end
 
 post('/books') do
