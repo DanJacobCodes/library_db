@@ -1,5 +1,5 @@
 class Book
-  attr_accessor(:title, :author,:id)
+  attr_accessor(:title, :author, :id)
 
   def initialize(attributes)
     @title = attributes.fetch(:title)
@@ -50,9 +50,8 @@ class Book
     DB.exec("UPDATE books SET title = '#{@title}', author = #{@author} WHERE id = #{@id};")
   end
 
-  define_method(:delete) do
+  def delete
    DB.exec("DELETE FROM books WHERE id = #{self.id};")
  end
-
 
 end
