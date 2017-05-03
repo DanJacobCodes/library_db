@@ -14,12 +14,15 @@ class Book
       title = book.fetch('title')
       author = book.fetch('author')
       id = book.fetch('id').to_i()
-      each_book = Book.new({:title => title, :author => author, :id => nil})
+      each_book = Book.new({:title => title, :author => author, :id => id})
       all_books.push(each_book)
     end
     all_books
   end
 
+  def fullname
+    'Title: ' + @title + ' Author: ' + @author
+  end
 
   def save
     result = DB.exec("INSERT INTO books (title, author) VALUES ('#{@title}', '#{@author}') RETURNING id;")
