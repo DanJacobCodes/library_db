@@ -8,7 +8,7 @@
 
 <% if @books.any?() %>
 
-  <form class="" action="/patronsss/<%= @patron.id() %>" method="post">
+  <form class="" action="/patrons/<%= @patron.id() %>" method="post">
     <input type="hidden" name="_method" value="patch">
 
     <% @books.each() do |book| %>

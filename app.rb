@@ -90,21 +90,14 @@ get('/patrons/:id/edit')do
 erb(:patron_edit_form)
 end
 
-#update name of patron
-patch('/patrons/:id') do
-  name = params.fetch('name')
-  @patron = Patron.find(params.fetch("id").to_i())
-  @patron.update({:name => name})
-  @patrons = Patron.all()
-  erb(:patrons)
-end
 
 #add books to patron
-patch('/patronsss/:id') do
+patch('/patrons/:id') do
+  name = params.fetch('name')
   patron_id = params.fetch('id').to_i()
   @patron = Patron.find(patron_id)
-  book_ids = params.fetch('book_ids')
-  @patron.update({:book_ids => book_ids})
+  book_ids = params.fetch('book_ids', [])
+  @patron.update({:book_ids => book_ids, :name => name})
   @books = Book.all()
   erb(:patron)
 end
