@@ -45,10 +45,13 @@ class Patron
     #This will update the patrons name in patrons table##
     @name = attributes.fetch(:name, @name)
     @id = self.id()
+
     DB.exec("UPDATE patrons SET name = '#{@name}' WHERE id = #{@id}; ")
     #THIS INSERT WILL add book_ids for that patron TO THE checkouts TABLE##
+    checkout_date = DateTime.now.to_date.to_s()
+    due_date = DateTime.now.to_date.+(7).to_s()
     attributes.fetch(:book_ids, []).each do |book_id|
-      DB.exec("INSERT INTO checkouts (book_id, patron_id) VALUES (#{book_id}, #{self.id()});")
+      DB.exec("INSERT INTO checkouts (book_id, patron_id, checkout_date, due_date) VALUES (#{book_id}, #{self.id()}, '#{checkout_date}', '#{due_date}');")
     end
   end
 

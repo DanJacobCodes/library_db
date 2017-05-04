@@ -37,7 +37,7 @@ describe(Patron) do
       member1.update({:name => "Brian Fan"})
       expect(member1.name()).to(eq("Brian Fan"))
     end
-
+    #
     it("lets you add an book to a patron") do
       member1 = Patron.new({:name => "Brad Pitt", :id => nil})
       member1.save()

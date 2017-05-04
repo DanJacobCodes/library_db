@@ -4,6 +4,7 @@ require('./lib/book')
 require('./lib/patron')
 require('pry')
 require('pg')
+require('date')
 also_reload('lib/**/*.rb')
 
 DB = PG.connect({:dbname => "library_test"})
@@ -93,9 +94,10 @@ end
 
 #add books to patron
 patch('/patrons/:id') do
-  name = params.fetch('name')
+
   patron_id = params.fetch('id').to_i()
   @patron = Patron.find(patron_id)
+  name = params.fetch('name', @patron.name)
   book_ids = params.fetch('book_ids', [])
   @patron.update({:book_ids => book_ids, :name => name})
   @books = Book.all()

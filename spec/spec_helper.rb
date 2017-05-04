@@ -2,6 +2,7 @@ require("rspec")
 require("pg")
 require("book")
 require("patron")
+require('date')
 
 DB = PG.connect({:dbname => "library_test"})
 
