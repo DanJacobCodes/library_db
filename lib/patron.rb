@@ -52,6 +52,7 @@ class Patron
     due_date = DateTime.now.to_date.+(7).to_s()
     attributes.fetch(:book_ids, []).each do |book_id|
       DB.exec("INSERT INTO checkouts (book_id, patron_id, checkout_date, due_date) VALUES (#{book_id}, #{self.id()}, '#{checkout_date}', '#{due_date}');")
+
     end
   end
 
@@ -67,9 +68,12 @@ class Patron
      author = book.first.fetch('author')
      checkout_book = Book.new({:id => book_id_in_row, :title => title, :author => author})
      patron_books.push(checkout_book)
+
     end
     patron_books
   end
+
+
 
   def delete
     DB.exec("DELETE FROM patrons WHERE id = #{self.id};")

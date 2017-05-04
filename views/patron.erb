@@ -26,7 +26,8 @@
   <h3>Your check out books:</h3>
   <% @patron.books().each() do |book| %>
   <ul>
-    <li><a href="/books/<%= book.id() %>"></a>Title: <%= book.title()%>, Author: <%= book.author() %></li>
+    <li><a href="/books/<%= book.id() %>"></a>Title: <%= book.title()%>, Author: <%= book.author() %>
+     Checkout Date:<%= book.@checkout_date() %></li>
   </ul>
   <%end  %>
 
