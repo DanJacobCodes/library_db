@@ -51,4 +51,15 @@ describe(Book) do
       expect(Book.all()).to(eq([book1]))
     end
   end
+
+  describe(".search") do
+    it("lets you search for a certain book based on its title/author") do
+      book1 = Book.new({:title => "It", :author => "Stephen King", :id => nil})
+      book1.save()
+      book2 = Book.new({:title => "Dreamcatcher", :author => "Stephen King", :id => nil})
+      book2.save()
+      expect(Book.search("Stephen King")).to(eq([book1, book2]))
+      expect(Book.search("Dreamcatcher")).to(eq([book2]))
+    end
+  end
 end
