@@ -81,6 +81,7 @@ end
 
 get('/patrons/:id') do
   @patron = Patron.find(params.fetch("id").to_i())
+  @books = Book.all()
   erb(:patron)
 end
 
@@ -89,6 +90,7 @@ get('/patrons/:id/edit')do
 erb(:patron_edit_form)
 end
 
+#update name of patron
 patch('/patrons/:id') do
   name = params.fetch('name')
   @patron = Patron.find(params.fetch("id").to_i())
@@ -96,6 +98,18 @@ patch('/patrons/:id') do
   @patrons = Patron.all()
   erb(:patrons)
 end
+
+#add books to patron
+patch('/patronsss/:id') do
+  patron_id = params.fetch('id').to_i()
+  @patron = Patron.find(patron_id)
+  book_ids = params.fetch('book_ids')
+  @patron.update({:book_ids => book_ids})
+  @books = Book.all()
+  erb(:patron)
+end
+
+
 
 delete('/patrons/:id') do
   @patron = Patron.find(params.fetch("id").to_i())

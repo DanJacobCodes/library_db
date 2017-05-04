@@ -1,8 +1,36 @@
 <h1>Member Details</h1>
 
-<p>
-  Name: <%=@patron.name()  %>
-
-</p>
+<p>Name: <%=@patron.name()  %></p>
 
 <a href="/patrons/<%= @patron.id() %>/edit">Edit Member Info</a>
+
+<h2>Select books you would like to checkout:</h2>
+
+<% if @books.any?() %>
+
+  <form class="" action="/patronsss/<%= @patron.id() %>" method="post">
+    <input type="hidden" name="_method" value="patch">
+
+    <% @books.each() do |book| %>
+    <div class="checkbox">
+      <label>
+        <input type="checkbox" name="book_ids[]" value="<%= book.id() %>">Title: <%= book.title()%>, Author: <%= book.author() %>
+      </label>
+    </div>
+    <% end  %>
+    <button type="submit" class="btn btn-success">Checkout</button>
+  </form>
+<% end  %>
+
+<% if @patron.books().any? %>
+  <h3>Your check out books:</h3>
+  <% @patron.books().each() do |book| %>
+  <ul>
+    <li><a href="/books/<%= book.id() %>"></a>Title: <%= book.title()%>, Author: <%= book.author() %></li>
+  </ul>
+  <%end  %>
+
+<% else  %>
+  <p> You haven't added any books yet!</p>
+
+<% end  %>
