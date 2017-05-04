@@ -50,6 +50,13 @@ post('/books') do
   erb(:success)
 end
 
+get('/search_books') do
+  keyword = params.fetch('keyword')
+  @found_books = Book.search(keyword)
+  erb(:search_result)
+
+end
+
 get('/books/:id') do
   @book = Book.find(params.fetch("id").to_i())
   erb(:book)

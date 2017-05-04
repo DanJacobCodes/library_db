@@ -58,7 +58,7 @@ class Book
  end
 
   def self.search(keyword)
-    search_books = DB.exec("SELECT * FROM books WHERE title LIKE '#{keyword}' OR author = '#{keyword}'")
+    search_books = DB.exec("SELECT * FROM books WHERE title = '#{keyword}' OR author = '#{keyword}'")
     found_books = []
     search_books.each() do |book|
       title = book.fetch('title')

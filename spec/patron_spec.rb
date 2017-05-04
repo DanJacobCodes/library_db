@@ -37,7 +37,28 @@ describe(Patron) do
       member1.update({:name => "Brian Fan"})
       expect(member1.name()).to(eq("Brian Fan"))
     end
+
+    it("lets you add an book to a patron") do
+      member1 = Patron.new({:name => "Brad Pitt", :id => nil})
+      member1.save()
+      bible = Book.new({:title => "Bible", :author => "God", :id => nil})
+      bible.save()
+      member1.update({:book_ids => [bible.id()]})
+      expect(member1.books()).to(eq([bible]))
+    end
   end
+
+  describe("#books") do
+    it("will show all the books patron has added") do
+      member1 = Patron.new({:name => "Brad Pitt", :id => nil})
+      member1.save()
+      bible = Book.new({:title => "Bible", :author => "God", :id => nil})
+      bible.save()
+      member1.update({:book_ids => [bible.id()]})
+      expect(member1.books()).to(eq([bible]))
+    end
+  end
+
 
   describe("#delete") do
     it("lets you delete an patron from the database") do

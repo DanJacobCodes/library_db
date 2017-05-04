@@ -1,0 +1,20 @@
+
+<% if @found_books.any?() %>
+<h1>Your Search Results</h1>
+  <ul>
+    <% @found_books.each() do |book|%>
+    <li><a href="/books/<%= book.id()%>">Title: <%= book.title()%><br> Author: <%= book.author() %></a> </li>
+    <% end %>
+  </ul>
+
+<% else %>
+
+
+  <p>No books found, please use other keyword</p>
+
+
+<% end %>
+
+<a href="/">Back to Home</a>
+<br>
+<a href="/books">Go back to Books</a>
