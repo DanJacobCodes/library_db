@@ -60,6 +60,8 @@ class Patron
     patron_books = []
     book_ids_in_checkouts.each() do |each_line|
      book_id_in_row = each_line.fetch('book_id').to_i()
+     checkout_date = each_line.fetch('checkout_date')
+     due_date = each_line.fetch('due_date')
      book = DB.exec("SELECT * FROM books WHERE id = #{book_id_in_row}")
      title = book.first.fetch('title')
      author = book.first.fetch('author')
