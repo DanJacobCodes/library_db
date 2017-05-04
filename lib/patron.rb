@@ -12,7 +12,7 @@ def self.all
   patrons_in_database.each() do |patron|
     name = patron.fetch('name')
     id = patron.fetch('id').to_i()
-    each_patron = Patron.new({:name => name, :id => nil})
+    each_patron = Patron.new({:name => name, :id => id})
     all_patrons.push(each_patron)
   end
   all_patrons

@@ -54,3 +54,45 @@ get('/books/:id') do
   @book = Book.find(params.fetch("id").to_i())
   erb(:book)
 end
+
+## Beginning of Patrons routing##
+get('/patrons/new') do
+  erb(:patron_form)
+end
+
+get('/patrons') do
+  @patrons = Patron.all()
+  erb(:patrons)
+end
+
+post('/patrons') do
+  name = params.fetch('name')
+  @patron = Patron.new({:name => name, :id => nil})
+  @patron.save()
+  erb(:success)
+end
+
+get('/patrons/:id') do
+  @patron = Patron.find(params.fetch("id").to_i())
+  erb(:patron)
+end
+
+get('/patrons/:id/edit')do
+@patron = Patron.find(params.fetch("id").to_i())
+erb(:patron_edit_form)
+end
+
+patch('/patrons/:id') do
+  name = params.fetch('name')
+  @patron = Patron.find(params.fetch("id").to_i())
+  @patron.update({:name => name})
+  @patrons = Patron.all()
+  erb(:patrons)
+end
+
+delete('/patrons/:id') do
+  @patron = Patron.find(params.fetch("id").to_i())
+  @patron.delete()
+  @patrons = Patron.all()
+  erb(:patrons)
+end

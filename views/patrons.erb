@@ -1,0 +1,16 @@
+<% if @patrons.any?() %>
+  <h1>Here all members!</h1>
+
+  <ul>
+    <% @patrons.each() do |patron| %>
+      <li><a href="/patrons/<%= patron.id()%>">Name: <%= patron.name()%></a> </li>
+    <% end %>
+  </ul>
+
+<% else %>
+
+    <p>There are no members!</p>
+
+<% end %>
+
+<a href="/">Return Home</a>
